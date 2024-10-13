@@ -11,6 +11,19 @@ def emotion_detector(text_to_analyze):
     #JSON Formatted Response
     response_json = json.loads(response.text)
 
+    #Handle Error 400
+    if response.status_code == 400:
+        result = {
+        'anger': None,
+        'disgust': None,
+        'fear': None,
+        'joy': None,
+        'sadness': None,
+        'dominant_emotion': None
+        }
+
+        return result
+
     #Emotion Scores
     anger_score = response_json["emotionPredictions"][0]["emotion"]["anger"]
     disgust_score = response_json["emotionPredictions"][0]['emotion']['disgust']
